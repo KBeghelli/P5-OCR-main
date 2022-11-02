@@ -11,7 +11,7 @@ function dynamicProducts() {
   })
     .then((data) => {
       data.forEach(product => {
-        let insertHtml = document.createElement("itemsContent");
+        let insertHtml = document.createElement("a");
 
         /*  Il reste à insérer le lien vers la page du produit : <a href="./product.html?id=42">
         * donc surement avec ce lien : ./product.html?id=${product._id}
