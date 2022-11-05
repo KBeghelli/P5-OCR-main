@@ -21,7 +21,7 @@ function dynamicProducts() {
 
         insertHtml.innerHTML = `<article>
       <img src="${product.imageUrl}" alt="${product.altTxt}">
-      <h3 class="productName">${product.name}</h3>aqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqé&
+      <h3 class="productName">${product.name}</h3>
       <p class="productDescription">${product.description}</p>
       </article>`
 
