@@ -1,4 +1,8 @@
 let urlProductsData = 'http://localhost:3000/api/products/';
+
+// J'aurais de nouveau besoin de l'API pour d'autres pages, donc j'exporte cette variable
+export { urlProductsData };
+
 let idToPutProductsData = document.getElementById('items');
 
 dynamicProducts();
@@ -12,12 +16,7 @@ function dynamicProducts() {
     .then((data) => {
       data.forEach(product => {
         let insertHtml = document.createElement("a");
-
-        /*  Il reste à insérer le lien vers la page du produit : <a href="./product.html?id=42">
-        * donc surement avec ce lien : ./product.html?id=${product._id} */
         insertHtml.setAttribute("href", `./product.html?id=${product._id}`)
-
-
         insertHtml.innerHTML = `<article>
       <img src="${product.imageUrl}" alt="${product.altTxt}">
       <h3 class="productName">${product.name}</h3>
