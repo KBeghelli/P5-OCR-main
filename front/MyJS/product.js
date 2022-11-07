@@ -7,26 +7,10 @@ let params = new URLSearchParams(document.location.search);
 import { urlProductsData } from "index.js";
 let idProduct = params.get("id");
 
-fetch("urlProductsData" + idProduct)
-  .then(res => res.json())
-  .then(data => {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
+function afficherProduit() {
+fetch("urlProductsData" + idProduct).then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+  })
+}
