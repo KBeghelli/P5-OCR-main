@@ -30,4 +30,4 @@ function dynamicProducts() {
 }
 
 // J'aurais de nouveau besoin de l'API pour d'autres pages, donc j'exporte cette variable
-export default urlProductsData;
+// export default urlProductsData;
