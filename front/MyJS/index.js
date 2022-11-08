@@ -1,5 +1,5 @@
 const urlProductsData = 'http://localhost:3000/api/products/';
-export { urlProductsData };
+//export { urlProductsData };
 let idToPutProductsData = document.getElementById('items');
 
 
