@@ -1,17 +1,10 @@
 /*const test = document.getElementById('title');
-test.textContent = "Ceci est un test";
+test.textContent = "Ceci est un test";*/
 
 
 let params = (new URL(document.location)).searchParams;
-let idProduct = params.get("id");*/
+let idProduct = params.get("id");
 
-let params = new URL(window.location.href).searchParams;
-// j'indique que la nouvelle url sera ajoutée d'un id :
-let newID = params.get('id');
-
-//---------J'APPELLE DE NOUVEAU L'API AVEC L'ID DU CANAPE CHOISI---------
-
-// je crée les variables dont j'ai besoin pour manipuler cette page :
 const image = document.getElementsByClassName('item__img');
 const title = document.getElementById('title');
 const price = document.getElementById('price');
@@ -22,7 +15,7 @@ let imageURL = "";
 let imageAlt = "";
 
 // je crée la bonne URL pour chaque produit choisi en ajoutant newID
-fetch("http://localhost:3000/api/products/" + newID)
+fetch("http://localhost:3000/api/products/" + idProduct)
   .then(res => res.json())
   .then(data => {
     // je modifie le contenu de chaque variable avec les bonnes données :
