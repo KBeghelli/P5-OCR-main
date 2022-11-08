@@ -2,7 +2,7 @@
 
 let params = new URLSearchParams(document.location.search);
 let urlProductsData = 'http://localhost:3000/api/products/';
-let idProduct = params.get("id");
+let idProduct = params.get("_id");
 
 //variables spécifiques au produit
 
