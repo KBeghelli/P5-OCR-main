@@ -1,27 +1,40 @@
-//variables globales
+let params = new URL(window.location.href).searchParams;
+// j'indique que la nouvelle url sera ajoutée d'un id :
+let newID = params.get('id');
 
-let params = new URLSearchParams(document.location.search);
-let urlProductsData = 'http://localhost:3000/api/products/';
-let idProduct = params.get("id");
+//---------J'APPELLE DE NOUVEAU L'API AVEC L'ID DU CANAPE CHOISI---------
 
-//variables spécifiques au produit
+// je crée les variables dont j'ai besoin pour manipuler cette page :
+const image = document.getElementsByClassName('item__img');
+const title = document.getElementById('title');
+const price = document.getElementById('price');
+const description = document.getElementById('description');
+const colors = document.getElementById('colors');
 
-const imageProduct = document.getElementsByClassName('item_img');
-const titleProduct = document.getElementById('title');
-const priceProduct = document.getElementById('price');
-const descriptionProduct = document.getElementById('description');
+let imageURL = "";
+let imageAlt = "";
 
+// je crée la bonne URL pour chaque produit choisi en ajoutant newID
+fetch("http://localhost:3000/api/products/" + newID)
+  .then(res => res.json())
+  .then(data => {
+    // je modifie le contenu de chaque variable avec les bonnes données :
+    image[0].innerHTML = `<img src="${data.imageUrl}" alt="${data.altTxt}">`;
+    imageURL = data.imageUrl;
+    imageAlt = data.altTxt;
+    title.innerHTML = `<h1>${data.name}</h1>`;
+    price.innerText = `${data.price}`;
+    description.innerText = `${data.description}`;
 
-fetch("urlProductsData" + idProduct)
-    .then(res => res.json())
-    .then(data => {
-        //priceProduct.textcontent = this.data.price;
-        descriptionProduct.innerText = `${data.description}`;
-
-        //let titleProduct = document.getElementById('title');
-        //titleProduct.innerHTML = data.name;
-    })
-    .catch((err) => {
-        console.error(err);
-    });
-
+    // je configure le choix des couleurs 
+    for (number in data.colors) {
+      colors.options[colors.options.length] = new Option(
+        data.colors[number],
+        data.colors[number]
+      );
+    }
+  })
+    // j'ajoute un message au cas où le serveur ne répond pas
+  .catch(_error => {
+    alert('Oops ! Le serveur ne répond pas, suivez les instructions dans le READ.me.');
+  });
