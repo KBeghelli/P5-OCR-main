@@ -1,5 +1,5 @@
 const urlProductsData = 'http://localhost:3000/api/products/';
-
+export {urlProductsData};
 let idToPutProductsData = document.getElementById('items');
 
 
@@ -10,7 +10,7 @@ fetch(urlProductsData).then((response) => {
 })
   .then((data) => {
     data.forEach(product => {
-      let insertHtml = document.createElement("a");
+      let insertHtml = document.createElement("a")
       insertHtml.setAttribute("href", `./product.html?id=${product._id}`)
       insertHtml.innerHTML = `<article>
       <img src="${product.imageUrl}" alt="${product.altTxt}">
