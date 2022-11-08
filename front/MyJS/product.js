@@ -10,6 +10,8 @@ const imageProduct = document.getElementsByClassName('item_img');
 const titleProduct = document.getElementById('title');
 const priceProduct = document.getElementById('price')
 
+afficherProduit()
+
 function afficherProduit() {
     fetch("urlProductsData" + idProduct)
         .then((response) => {
