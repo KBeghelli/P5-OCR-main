@@ -1,4 +1,4 @@
-let urlProductsData = 'http://localhost:3000/api/products/';
+export const urlProductsData = 'http://localhost:3000/api/products/';
 
 let idToPutProductsData = document.getElementById('items');
 
