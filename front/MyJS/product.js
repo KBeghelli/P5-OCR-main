@@ -14,7 +14,8 @@ fetch('http://localhost:3000/api/products/' + idProduct)
   .then(data => {
 
 // pour les images, il faut à la fois insérer le src et le alt
-    title.innerHTML = `${data.name}`;
+// image.innerHTML = `<img src="${product.imageUrl}" alt="${product.altTxt}">`
+    title.innerText = `${data.name}`;
     price.innerText = `${data.price}`;
     description.innerText = `${data.description}`;
  
