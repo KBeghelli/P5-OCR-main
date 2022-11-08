@@ -23,6 +23,9 @@ function afficherProduit() {
         .then(data => {
             priceProduct.textcontent = this.data.price;
             descriptionProduct.innerText = `${data.description}`;
+
+            let titleProduct = document.getElementById('title');
+            titleProduct.innerHTML = data.name;
         })
         .catch((err) => {
             console.error(err);
