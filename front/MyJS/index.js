@@ -1,7 +1,5 @@
 let urlProductsData = 'http://localhost:3000/api/products/';
 
-// J'aurais de nouveau besoin de l'API pour d'autres pages, donc j'exporte cette variable
-export { urlProductsData };
 
 let idToPutProductsData = document.getElementById('items');
 
@@ -30,3 +28,6 @@ function dynamicProducts() {
       console.error(err);
     });
 }
+
+// J'aurais de nouveau besoin de l'API pour d'autres pages, donc j'exporte cette variable
+export { urlProductsData };
