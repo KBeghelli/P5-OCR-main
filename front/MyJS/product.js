@@ -16,7 +16,7 @@ fetch("urlProductsData" + idProduct)
     .then(res => res.json())
     .then(data => {
         //priceProduct.textcontent = this.data.price;
-        descriptionProduct.innerHTML = `${data.description}`;
+        descriptionProduct.innerText = `${data.description}`;
 
         //let titleProduct = document.getElementById('title');
         //titleProduct.innerHTML = data.name;
