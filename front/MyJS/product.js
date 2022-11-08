@@ -1,40 +1,52 @@
-let params = new URL(window.location.href).searchParams;
-// j'indique que la nouvelle url sera ajoutée d'un id :
-let newID = params.get('id');
-
-//---------J'APPELLE DE NOUVEAU L'API AVEC L'ID DU CANAPE CHOISI---------
-
-// je crée les variables dont j'ai besoin pour manipuler cette page :
-const image = document.getElementsByClassName('item__img');
-const title = document.getElementById('title');
-const price = document.getElementById('price');
-const description = document.getElementById('description');
-const colors = document.getElementById('colors');
-
-let imageURL = "";
-let imageAlt = "";
-
-// je crée la bonne URL pour chaque produit choisi en ajoutant newID
-fetch("http://localhost:3000/api/products/" + newID)
-  .then(res => res.json())
-  .then(data => {
-    // je modifie le contenu de chaque variable avec les bonnes données :
-    image[0].innerHTML = `<img src="${data.imageUrl}" alt="${data.altTxt}">`;
-    imageURL = data.imageUrl;
-    imageAlt = data.altTxt;
-    title.innerHTML = `<h1>${data.name}</h1>`;
-    price.innerText = `${data.price}`;
-    description.innerText = `${data.description}`;
-
-    // je configure le choix des couleurs 
-    for (number in data.colors) {
-      colors.options[colors.options.length] = new Option(
-        data.colors[number],
-        data.colors[number]
-      );
-    }
+const params = new URLSearchParams(document.location.search); //console.log(document.location);  https://developer.mozilla.org/fr/docs/Web/API/Document/location
+// la variable id va récupérer la valeur du paramètre _id
+const id = params.get("_id");
+console.log(id); 
+//--------------------------------------------------------------------------
+// Récupération des produits de l'api et traitement des données (voir script.js)
+//--------------------------------------------------------------------------
+fetch("http://localhost:3000/api/products")
+  .then((res) => res.json())
+  .then((objetProduits) => {
+    // execution de la fontion lesProduits
+    lesProduits(objetProduits);
   })
-    // j'ajoute un message au cas où le serveur ne répond pas
-  .catch(_error => {
-    alert('Oops ! Le serveur ne répond pas, suivez les instructions dans le READ.me.');
+  .catch((err) => {
+    document.querySelector(".item").innerHTML = "<h1>erreur 404</h1>";
+    console.log("erreur 404, sur ressource api: " + err);
   });
+//------------------------------------------------------------------------
+// Création d'objet articleClient
+//------------------------------------------------------------------------
+// déclaration objet articleClient prêt à être modifiée par les fonctions suivantes d'évènements
+let articleClient = {};
+// id du procuit
+articleClient._id = id;
+//------------------------------------------------------------------------
+// fonction d'affichage du produit de l'api
+//------------------------------------------------------------------------
+function lesProduits(produit) {
+  // déclaration des variables pointage des éléments
+  let imageAlt = document.querySelector("article div.item__img");
+  let titre = document.querySelector("#title");
+  let prix = document.querySelector("#price");
+  let description = document.querySelector("#description");
+  let couleurOption = document.querySelector("#colors");
+  // boucle for pour chercher un indice
+  for (let choix of produit) {
+    //si id (définit par l'url) est identique à un _id d'un des produits du tableau, on récupère son indice de tableau qui sert pour les éléments produit à ajouter
+    if (id === choix._id) {
+      //ajout des éléments de manière dynamique
+      imageAlt.innerHTML = `<img src="${choix.imageUrl}" alt="${choix.altTxt}">`;
+      titre.textContent = `${choix.name}`;
+      prix.textContent = `${choix.price}`;
+      description.textContent = `${choix.description}`;
+      // boucle pour chercher les couleurs pour chaque produit en fonction de sa clef/valeur (la logique: tableau dans un tableau = boucle dans boucle)
+      for (let couleur of choix.colors) {
+        // ajout des balises d'option couleur avec leur valeur
+        couleurOption.innerHTML += `<option value="${couleur}">${couleur}</option>`;
+      }
+    }
+  }
+  console.log("affichage effectué");
+}
