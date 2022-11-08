@@ -8,7 +8,8 @@ let idProduct = params.get("id");
 
 const imageProduct = document.getElementsByClassName('item_img');
 const titleProduct = document.getElementById('title');
-const priceProduct = document.getElementById('price')
+const priceProduct = document.getElementById('price');
+const descriptionProduct = document.getElementById('description');
 
 afficherProduit()
 
@@ -21,6 +22,7 @@ function afficherProduit() {
         })
         .then(data => {
             priceProduct.textcontent = this.data.price;
+            descriptionProduct.innerText = `${data.description}`;
         })
         .catch((err) => {
             console.error(err);
