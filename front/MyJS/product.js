@@ -1,6 +1,3 @@
-/*const test = document.getElementById('title');
-test.textContent = "Ceci est un test";*/
-
 
 let params = (new URL(document.location)).searchParams;
 let idProduct = params.get("id");
