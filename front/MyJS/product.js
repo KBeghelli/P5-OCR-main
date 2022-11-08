@@ -14,6 +14,7 @@ const image = document.getElementsByClassName('item__img');
 fetch("http://localhost:3000/api/products/" + idProduct)
   .then(res => res.json())
   .then(data => {
+// pour les images, il faut à la fois insérer le src et le alt
     title.innerHTML = `${data.name}`;
     price.innerText = `${data.price}`;
     description.innerText = `${data.description}`;

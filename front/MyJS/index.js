@@ -2,9 +2,9 @@ let urlProductsData = 'http://localhost:3000/api/products/';
 
 let idToPutProductsData = document.getElementById('items');
 
-dynamicProducts();
+/*dynamicProducts();
 
-function dynamicProducts() {
+function dynamicProducts() {*/
   fetch(urlProductsData).then((response) => {
     if (response.ok) {
       return response.json();
@@ -26,7 +26,7 @@ function dynamicProducts() {
     .catch((err) => {
       console.error(err);
     });
-}
+/*}*/
 
 // J'aurais de nouveau besoin de l'API pour d'autres pages, donc j'exporte cette variable
 // export default urlProductsData;
