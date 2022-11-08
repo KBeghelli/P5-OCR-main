@@ -20,4 +20,7 @@ function afficherProduit() {
         .then(data => {
             priceProduct.textcontent = this.data.price;
         })
+        .catch((err) => {
+            console.error(err);
+        });
 }
