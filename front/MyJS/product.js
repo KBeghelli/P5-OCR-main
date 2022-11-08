@@ -11,14 +11,13 @@ const titleProduct = document.getElementById('title');
 const priceProduct = document.getElementById('price')
 
 function afficherProduit() {
-fetch("urlProductsData" + idProduct)
-.then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-  })
-.then(data => {
-    
-}
-    )
+    fetch("urlProductsData" + idProduct)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then(data => {
+            priceProduct.textcontent = this.data.price;
+        })
 }
