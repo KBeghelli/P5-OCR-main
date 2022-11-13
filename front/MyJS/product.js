@@ -1,7 +1,6 @@
 
 let params = (new URL(document.location)).searchParams;
 let idProduct = params.get("id");
-//import {urlProductsData} from './index.js';
 
 const title = document.getElementById('title');
 const price = document.getElementById('price');
