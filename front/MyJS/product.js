@@ -6,7 +6,6 @@ const title = document.getElementById('title');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
 const colors = document.getElementById('colors');
-const image = document.getElementsByClassName('.item__img');
 
 fetch('http://localhost:3000/api/products/' + idProduct)
   .then(res => res.json())
@@ -18,8 +17,7 @@ fetch('http://localhost:3000/api/products/' + idProduct)
     imageURL = data.imageUrl;
     imageAlt = data.altTxt;*/
     let productImg = document.createElement("img");
-    //document.querySelector(".item__img").appendChild(productImg);
-    image.appendChild(productImg);
+    document.querySelector(".item__img").appendChild(productImg);
     productImg.src = data.imageUrl;
     productImg.alt = data.altTxt;
 
