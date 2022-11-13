@@ -6,7 +6,8 @@ const title = document.getElementById('title');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
 const colors = document.getElementById('colors');
-const image = document.querySelector("article div.item__img");
+//const image = document.querySelector("article div.item__img");
+const image = document.getElementByClass('.item__img');
 
 fetch('http://localhost:3000/api/products/' + idProduct)
   .then(res => res.json())
