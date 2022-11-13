@@ -18,7 +18,8 @@ fetch('http://localhost:3000/api/products/' + idProduct)
     imageURL = data.imageUrl;
     imageAlt = data.altTxt;*/
     let productImg = document.createElement("img");
-    document.querySelector(".item__img").appendChild(productImg);
+    //document.querySelector(".item__img").appendChild(productImg);
+    image.appendChild(productImg);
     productImg.src = data.imageUrl;
     productImg.alt = data.altTxt;
 
