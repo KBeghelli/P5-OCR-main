@@ -18,9 +18,9 @@ fetch('http://localhost:3000/api/products/' + idProduct)
     description.innerText = `${data.description}`;
 
     for (let color of data.colors) {
-      //let productColors = document.createElement("test");
-      //document.querySelector("#colors").appendChild(productColors);
-      colors.innerHTML += `<option value="${color}">${color}</option>`;
+      colors.innerHTML += `<option value=
+                          "${color}">${color}
+                          </option>`;
     }
 
   })
