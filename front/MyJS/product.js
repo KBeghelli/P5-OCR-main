@@ -16,7 +16,7 @@ fetch('http://localhost:3000/api/products/' + idProduct)
     document.querySelector(".item__img").appendChild(productImg);
     productImg.src = data.imageUrl;
     productImg.alt = data.altTxt;*/
-    image.innerHTML = `<img src="${choix.imageUrl}" alt="${choix.altTxt}">`;
+    image.innerHTML = `<img src="${data.imageUrl}" alt="${data.altTxt}">`;
 
     title.innerText = `${data.name}`;
     price.innerText = `${data.price}`;
