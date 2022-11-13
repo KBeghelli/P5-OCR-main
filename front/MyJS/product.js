@@ -6,15 +6,17 @@ const title = document.getElementById('title');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
 const colors = document.getElementById('colors');
+const image = document.querySelector("article div.item__img");
 
 fetch('http://localhost:3000/api/products/' + idProduct)
   .then(res => res.json())
   .then(data => {
-    
-    let productImg = document.createElement("img");
+
+    /*let productImg = document.createElement("img");
     document.querySelector(".item__img").appendChild(productImg);
     productImg.src = data.imageUrl;
-    productImg.alt = data.altTxt;
+    productImg.alt = data.altTxt;*/
+    image.innerHTML = `<img src="${choix.imageUrl}" alt="${choix.altTxt}">`;
 
     title.innerText = `${data.name}`;
     price.innerText = `${data.price}`;
