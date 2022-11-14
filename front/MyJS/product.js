@@ -30,23 +30,6 @@ fetch('http://localhost:3000/api/products/' + idProduct)
 
 /**********************************************************************************************************/
 
-/* FONCTION D'AJOUT AU PANIER
-* On sélectionne le bouton AddToCart, et on écoute ses évènements
-* Si les données entrées sont valides (quantité entre 1 et 100 et couleur sélectionné), 
-* alors on affiche un message "Produit ajouté au panier !" et on appelle une fonction d'ajout au panier,
-* sinon (si quantité ou couleur non sélectionné par exemple), afficher message d'erreur
-*/
-
-/*const idQuantity = document.getElementById('quantity');
-const idColors = document.getElementById('colors');
-
-const addToCart = document.getElementById('addToCart');
-
-addToCart.addEventListener("click", () => {
-if
-
-}) */
-
 /* Comme préciser dans le "guide des étapes clés" : 
 * "Nous devons récupérer un array contenant trois choses : l'id, la quantité et la couleur du produit", 
 * pour ensuite pouvoir ajouter cette array au panier
@@ -74,3 +57,34 @@ productQuantity.addEventListener("input", (essai) => {
   let exempleQuantity = essai.value ;
   chosenProduct.quantity = exempleQuantity ;
 });
+
+/* chosenProduct est désormais un array contenant l'id du produit, et la couleur/quantité sélectionné
+par l'utilisateur */
+
+/*********************************************************************************************************/
+
+/* FONCTION D'AJOUT AU PANIER
+* On sélectionne le bouton AddToCart, et on écoute ses évènements
+* Si les données entrées sont valides (quantité entre 1 et 100 et couleur sélectionné), 
+* alors on affiche un message "Produit ajouté au panier !" et on appelle une fonction d'ajout au panier,
+* sinon (si quantité ou couleur non sélectionné par exemple), afficher message d'erreur
+*/
+
+const addToCart = document.getElementById('addToCart');
+
+addToCart.addEventListener("click", () => {
+if (
+  chosenProduct.quantity < 1 ||
+  chosenProduct.quantity > 100 ||
+  chosenProduct.quantity === undefined ||
+  chosenProduct.colors === undefined
+) {
+  alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !")
+} else {
+  pushLocalStorage()
+}
+})
+
+function pushLocalStorage(){
+  
+}
