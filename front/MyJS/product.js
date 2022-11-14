@@ -56,3 +56,14 @@ if
 
 let chosenProduct = {};
 chosenProduct._id = idProduct;
+
+// Couleur
+
+let productColor = document.getElementById('colors');
+productColor.addEventListener("change", (test) => {
+
+  let exempleColor = test.value ;
+  chosenProduct.colors = exempleColor ;
+});
+
+// Quantité
