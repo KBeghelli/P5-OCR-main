@@ -44,7 +44,7 @@ chosenProduct._id = idProduct;
 
 let productColor = document.getElementById('colors');
 productColor.addEventListener("change", (test) => {
-
+  console.log(test)
   let exempleColor = test.value ;
   chosenProduct.colors = exempleColor ;
 });
@@ -84,6 +84,10 @@ if (
   pushLocalStorage()
 }
 })
+
+
+
+
 
 function pushLocalStorage(){
   
