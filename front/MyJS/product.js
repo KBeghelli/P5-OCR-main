@@ -67,3 +67,10 @@ productColor.addEventListener("change", (test) => {
 });
 
 // Quantité
+
+let productQuantity = document.getElementById('quantity');
+productQuantity.addEventListener("input", (essai) => {
+
+  let exempleQuantity = essai.value ;
+  chosenProduct.quantity = exempleQuantity ;
+});
