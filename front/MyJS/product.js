@@ -44,8 +44,8 @@ chosenProduct._id = idProduct;
 
 let productColor = document.getElementById('colors');
 productColor.addEventListener("change", (test) => {
-  console.log(test)
-  let exempleColor = test.value ;
+  console.log(test.target.value)
+  let exempleColor = test.target.value ;
   chosenProduct.colors = exempleColor ;
 });
 
@@ -54,7 +54,7 @@ productColor.addEventListener("change", (test) => {
 let productQuantity = document.getElementById('quantity');
 productQuantity.addEventListener("input", (essai) => {
 
-  let exempleQuantity = essai.value ;
+  let exempleQuantity = essai.target.value ;
   chosenProduct.quantity = exempleQuantity ;
 });
 
