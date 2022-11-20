@@ -87,4 +87,5 @@ if (
 
 function pushLocalStorage(){
   window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
+  alert("Produit ajouté !")
 }
