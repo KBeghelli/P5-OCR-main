@@ -87,8 +87,8 @@ if (
 }
 })
 
-/*
+
 function pushLocalStorage(){
-  window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
+  window.localStorage.setItem('productAddedToStorage', JSON.stringify(myCart));
   alert("Produit ajouté !")
-}*/
+}
