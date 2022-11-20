@@ -65,9 +65,9 @@ par l'utilisateur */
 
 /* FONCTION D'AJOUT AU PANIER
 * On sélectionne le bouton AddToCart, et on écoute ses évènements
-* Si les données entrées sont valides (quantité entre 1 et 100 et couleur sélectionné), 
-* alors on affiche un message "Produit ajouté au panier !" et on appelle une fonction d'ajout au panier,
-* sinon (si quantité ou couleur non sélectionné par exemple), afficher message d'erreur
+* Si les données concernant quantité et couleurs validé par l'utilisateur sont erronés 
+* (quantité ou couleur non sélectionné par exemple), alors on affiche un message d'erreur, 
+* sinon, on utilise la fonction pushLocalStorage, qui va rentrer ces donnés dans le local storage
 */
 
 const addToCart = document.getElementById('addToCart');
@@ -85,10 +85,6 @@ if (
 }
 })
 
-
-
-
-
 function pushLocalStorage(){
-  
+  window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
 }
