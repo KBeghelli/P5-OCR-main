@@ -72,6 +72,8 @@ par l'utilisateur */
 
 const addToCart = document.getElementById('addToCart');
 
+let myCart = [];
+
 addToCart.addEventListener("click", () => {
 if (
   chosenProduct.quantity < 1 ||
@@ -81,11 +83,12 @@ if (
 ) {
   alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !")
 } else {
-  pushLocalStorage()
+  myCart.push;
 }
 })
 
+/*
 function pushLocalStorage(){
   window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
   alert("Produit ajouté !")
-}
+}*/
