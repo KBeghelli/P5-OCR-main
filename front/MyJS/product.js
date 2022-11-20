@@ -45,8 +45,8 @@ chosenProduct._id = idProduct;
 let productColor = document.getElementById('colors');
 productColor.addEventListener("change", (test) => {
   console.log(test.target.value)
-  let exempleColor = test.target.value ;
-  chosenProduct.colors = exempleColor ;
+  let exempleColor = test.target.value;
+  chosenProduct.colors = exempleColor;
 });
 
 // Quantité
@@ -54,8 +54,8 @@ productColor.addEventListener("change", (test) => {
 let productQuantity = document.getElementById('quantity');
 productQuantity.addEventListener("input", (essai) => {
 
-  let exempleQuantity = essai.target.value ;
-  chosenProduct.quantity = exempleQuantity ;
+  let exempleQuantity = essai.target.value;
+  chosenProduct.quantity = exempleQuantity;
 });
 
 /* chosenProduct est désormais un array contenant l'id du produit, et la couleur/quantité sélectionné
@@ -75,17 +75,17 @@ const addToCart = document.getElementById('addToCart');
 let myCart = [];
 
 addToCart.addEventListener("click", () => {
-if (
-  chosenProduct.quantity < 1 ||
-  chosenProduct.quantity > 100 ||
-  chosenProduct.quantity === undefined ||
-  chosenProduct.colors === undefined
-) {
-  alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !")
-} else {
-  myCart.push(chosenProduct);
-  alert("Produit ajouté !")
-}
+  if (
+    chosenProduct.quantity < 1 ||
+    chosenProduct.quantity > 100 ||
+    chosenProduct.quantity === undefined ||
+    chosenProduct.colors === undefined
+  ) {
+    alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !")
+  } else {
+    myCart.push(chosenProduct);
+    alert("Produit ajouté !")
+  }
 })
 
 /*pushLocalStorage();
@@ -93,3 +93,10 @@ function pushLocalStorage(){
   window.localStorage.setItem('productAddedToStorage', JSON.stringify(myCart));
   alert("Produit ajouté !")
 }*/
+
+let productInLocalStorage =  JSON.parse(localStorage.getItem('product'));
+
+const addProductLocalStorage = () => {
+  productInLocalStorage.push(chosenProduct);
+  localStorage.setItem('product', JSON.stringify(productInLocalStorage));
+}
