@@ -48,6 +48,7 @@ productColor.addEventListener("change", (test) => {
   let exempleColor = test.target.value;
   chosenProduct.colors = exempleColor;
   chosenProduct.price = document.getElementById('price').textContent;
+  chosenProduct.name = document.getElementById('title').textContent;
 });
 
 // Quantité
@@ -114,4 +115,4 @@ const addProductLocalStorage = () => {
 
 
 
-// QUESTION LIGNE 50
+// QUESTION LIGNE 50/92
