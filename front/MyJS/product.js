@@ -98,5 +98,3 @@ const addProductLocalStorage = () => {
   localStorage.setItem('product', JSON.stringify(productInLocalStorage));
 }*/
 
-let products = JSON.parse(localStorage.getItem("products"));
-let cart = JSON.parse(localStorage.getItem("cart"));
