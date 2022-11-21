@@ -39,7 +39,7 @@ fetch('http://localhost:3000/api/products/' + idProduct)
 
 let chosenProduct = {};
 chosenProduct._id = idProduct;
-chosenProduct.price = document.getElementById('price').textContent;
+
 
 // Couleur
 
@@ -47,6 +47,7 @@ let productColor = document.getElementById('colors');
 productColor.addEventListener("change", (test) => {
   let exempleColor = test.target.value;
   chosenProduct.colors = exempleColor;
+  chosenProduct.price = document.getElementById('price').textContent;
 });
 
 // Quantité
