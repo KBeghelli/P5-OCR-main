@@ -39,8 +39,7 @@ fetch('http://localhost:3000/api/products/' + idProduct)
 
 let chosenProduct = {};
 chosenProduct._id = idProduct;
-chosenProduct.price = price.textContent;
-
+chosenProduct.price = document.getElementById('price').textcontent;
 // Couleur
 
 let productColor = document.getElementById('colors');
@@ -61,13 +60,6 @@ productQuantity.addEventListener("input", (essai) => {
 const selectQuantity = document.getElementById('quantity');
 const selectColors = document.getElementById('colors');
 
-let chosenProduct2 = {
-  id: idProduct,
-  price: price.textContent,
-  color: selectColors.value,
-  quantity: selectQuantity.value,
-}
-console.log(chosenProduct2)
 /* chosenProduct est désormais un array contenant l'id du produit, et la couleur/quantité sélectionné
 par l'utilisateur */
 
