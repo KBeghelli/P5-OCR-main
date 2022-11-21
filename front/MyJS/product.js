@@ -39,6 +39,7 @@ fetch('http://localhost:3000/api/products/' + idProduct)
 
 let chosenProduct = {};
 chosenProduct._id = idProduct;
+chosenProduct.price = price.innerText;
 
 // Couleur
 
@@ -52,7 +53,6 @@ productColor.addEventListener("change", (test) => {
 
 let productQuantity = document.getElementById('quantity');
 productQuantity.addEventListener("input", (essai) => {
-
   let exempleQuantity = essai.target.value;
   chosenProduct.quantity = exempleQuantity;
 });
@@ -71,8 +71,6 @@ par l'utilisateur */
 
 const addToCart = document.getElementById('addToCart');
 
-//let myCart = [];
-
 addToCart.addEventListener("click", () => {
   if (
     chosenProduct.quantity < 1 ||
@@ -89,7 +87,6 @@ addToCart.addEventListener("click", () => {
 
 function pushLocalStorage(){
   window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
-  console.log(JSON.parse(localStorage.getItem('productAddedToStorage')));
 }
 
 
@@ -99,3 +96,6 @@ const addProductLocalStorage = () => {
   productInLocalStorage.push(chosenProduct);
   localStorage.setItem('product', JSON.stringify(productInLocalStorage));
 }*/
+
+let products = JSON.parse(localStorage.getItem("products"));
+let cart = JSON.parse(localStorage.getItem("cart"));
