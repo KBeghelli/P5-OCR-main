@@ -55,6 +55,7 @@ let productQuantity = document.getElementById('quantity');
 productQuantity.addEventListener("input", (essai) => {
   let exempleQuantity = essai.target.value;
   chosenProduct.quantity = exempleQuantity;
+  console.log(chosenProduct);
 });
 
 /* chosenProduct est désormais un array contenant l'id du produit, et la couleur/quantité sélectionné
