@@ -89,9 +89,9 @@ addToCart.addEventListener("click", () => {
 
 function pushLocalStorage(){
   window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
+  console.log(JSON.parse(localStorage.getItem('productAddedToStorage')));
 }
 
-console.log(JSON.parse(localStorage.getItem('productAddedToStorage')))
 
 /*let productInLocalStorage =  JSON.parse(localStorage.getItem('product'));
 
