@@ -72,6 +72,8 @@ par l'utilisateur */
 
 const addToCart = document.getElementById('addToCart');
 
+let test = [];
+
 addToCart.addEventListener("click", () => {
   if (
     chosenProduct.quantity < 1 ||
@@ -81,14 +83,16 @@ addToCart.addEventListener("click", () => {
   ) {
     alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !")
   } else {
-    pushLocalStorage();
+    test.push(chosenProduct)
+    localStorage.setItem('testing', JSON.stringify(test));
     alert("Produit ajouté !")
   }
 })
 
-function pushLocalStorage(){
-  window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
-}
+
+/*function pushLocalStorage(){
+  window.localStorage.setItem('chosenProduct', JSON.stringify(chosenProduct));
+}*/
 
 
 /*let productInLocalStorage =  JSON.parse(localStorage.getItem('product'));
