@@ -89,7 +89,7 @@ addToCart.addEventListener("click", () => {
   } else {
     test.push(chosenProduct)
     localStorage.setItem('testing', JSON.stringify(test));
-    alert("Produit ajouté !")
+    alert("Vous venez d'ajouter $(chosenProduct.quantity) exemplaire de ce produit de couleur $(chosenProduct.colors) à votre panier !")
   }
 })
 
@@ -106,3 +106,12 @@ const addProductLocalStorage = () => {
   localStorage.setItem('product', JSON.stringify(productInLocalStorage));
 }*/
 
+
+
+
+
+
+
+
+
+// QUESTION LIGNE 50
