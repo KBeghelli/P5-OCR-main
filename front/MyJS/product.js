@@ -39,7 +39,8 @@ fetch('http://localhost:3000/api/products/' + idProduct)
 
 let chosenProduct = {};
 chosenProduct._id = idProduct;
-chosenProduct.price = document.getElementById('price').textcontent;
+chosenProduct.price = document.getElementById('price').textContent;
+
 // Couleur
 
 let productColor = document.getElementById('colors');
