@@ -58,6 +58,16 @@ productQuantity.addEventListener("input", (essai) => {
   console.log(chosenProduct);
 });
 
+const selectQuantity = document.getElementById('quantity');
+const selectColors = document.getElementById('colors');
+
+let chosenProduct2 = {
+  id: idProduct,
+  price: price.textContent,
+  color: selectColors.value,
+  quantity: selectQuantity.value,
+}
+console.log(chosenProduct2)
 /* chosenProduct est désormais un array contenant l'id du produit, et la couleur/quantité sélectionné
 par l'utilisateur */
 
