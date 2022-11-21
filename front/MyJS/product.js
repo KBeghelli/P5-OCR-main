@@ -44,7 +44,6 @@ chosenProduct._id = idProduct;
 
 let productColor = document.getElementById('colors');
 productColor.addEventListener("change", (test) => {
-  console.log(test.target.value)
   let exempleColor = test.target.value;
   chosenProduct.colors = exempleColor;
 });
@@ -85,13 +84,14 @@ addToCart.addEventListener("click", () => {
   } else {
     pushLocalStorage();
     alert("Produit ajouté !")
-    console.log(JSON.parse(localStorage.getItem("cart")))
   }
 })
 
 function pushLocalStorage(){
   window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
 }
+
+console.log(JSON.parse(localStorage.getItem('productAddedToStorage')))
 
 /*let productInLocalStorage =  JSON.parse(localStorage.getItem('product'));
 
