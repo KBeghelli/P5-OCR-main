@@ -77,9 +77,12 @@ par l'utilisateur */
 
 const addToCart = document.getElementById('addToCart');
 
-let test = [];
-
 addToCart.addEventListener("click", () => {
+
+  // variable dans laquelle on insère les clés/valeurs présentes dans le localstorage
+  let produitEnregistré = JSON.parse(localStorage.getItem("produit"));
+
+  //vérifie quantité couleur
   if (
     chosenProduct.quantity < 1 ||
     chosenProduct.quantity > 100 ||
@@ -87,24 +90,35 @@ addToCart.addEventListener("click", () => {
     chosenProduct.colors === undefined
   ) {
     alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !")
-  } else {
-    test.push(chosenProduct)
-    localStorage.setItem('testing', JSON.stringify(test));
-    alert("Vous venez d'ajouter $(chosenProduct.quantity) exemplaire de ce produit de couleur $(chosenProduct.colors) à votre panier !")
+  }
+
+  // Si il y a déjà des produits dans le LS
+
+  else if (produitEnregistré) {
+    produitEnregistré.push(chosenProduct);
+    localStorage.setItem("produit", JSON.stringify(produitEnregistré))
+  }
+
+  // Si il n'y a pas de produit dans le LS
+  else {
+    produitEnregistré = [];
+    produitEnregistré.push(chosenProduct);
+    localStorage.setItem("produit", JSON.stringify(produitEnregistré))
   }
 })
 
-
-/*function pushLocalStorage(){
-  window.localStorage.setItem('chosenProduct', JSON.stringify(chosenProduct));
-}*/
-
-
-/*let productInLocalStorage =  JSON.parse(localStorage.getItem('product'));
-
-const addProductLocalStorage = () => {
-  productInLocalStorage.push(chosenProduct);
-  localStorage.setItem('product', JSON.stringify(productInLocalStorage));
+/*// variable dans laquelle on insère les clés/valeurs présentes dans le localstorage
+let produitEnregistré = JSON.parse(localStorage.getItem("produit"));
+// Si il y a déjà des produits dans le LS
+if (produitEnregistré) {
+  produitEnregistré.push(chosenProduct);
+  localStorage.setItem("produit", JSON.stringify(produitEnregistré))
+}
+// Si il n'y a pas de produit dans le LS
+else {
+  produitEnregistré = [];
+  produitEnregistré.push(chosenProduct);
+  localStorage.setItem("produit", JSON.stringify(produitEnregistré))
 }*/
 
 
