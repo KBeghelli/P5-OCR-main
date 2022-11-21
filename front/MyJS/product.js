@@ -90,7 +90,7 @@ addToCart.addEventListener("click", () => {
 })
 
 function pushLocalStorage(){
-  window.localStorage.setItem('productAddedToStorage', JSON.stringify(myCart));
+  window.localStorage.setItem('productAddedToStorage', JSON.stringify(chosenProduct));
 }
 
 /*let productInLocalStorage =  JSON.parse(localStorage.getItem('product'));
