@@ -79,10 +79,12 @@ const addToCart = document.getElementById('addToCart');
 
 addToCart.addEventListener("click", () => {
 
-  // variable dans laquelle on insère les clés/valeurs présentes dans le localstorage
+  // 
   let produitEnregistré = JSON.parse(localStorage.getItem("produit"));
 
-  //vérifie quantité couleur
+  /* Une condition pour vérifier que la couleur/quantité est une donnée valide, si oui, la fonction
+  * la fonction continue, si non, elle affiche un message d'erreur et s'arrête avec return
+  */
   if (
     chosenProduct.quantity < 1 ||
     chosenProduct.quantity > 100 ||
