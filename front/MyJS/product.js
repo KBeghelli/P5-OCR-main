@@ -90,7 +90,7 @@ addToCart.addEventListener("click", () => {
     chosenProduct.colors === undefined
   ) {
     alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !");
-    //return;
+    return;
   }
 
   // Si il y a déjà des produits dans le LS
