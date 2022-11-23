@@ -96,18 +96,23 @@ addToCart.addEventListener("click", () => {
     return;
   }
 
+  // Fonction d'ajout d'un produit dans le LocalStorage
+  
+  function pushLocalStorage() {
+    produitEnregistré.push(chosenProduct);
+    localStorage.setItem("produit", JSON.stringify(produitEnregistré))
+  }
+
   // Si il y a déjà des produits dans le LS
 
   if (produitEnregistré) {
-    produitEnregistré.push(chosenProduct);
-    localStorage.setItem("produit", JSON.stringify(produitEnregistré))
+    pushLocalStorage()
   }
 
   // Si il n'y a pas de produit dans le LS
   else {
     produitEnregistré = [];
-    produitEnregistré.push(chosenProduct);
-    localStorage.setItem("produit", JSON.stringify(produitEnregistré))
+    pushLocalStorage()
   }
 })
 
