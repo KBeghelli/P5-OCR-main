@@ -89,44 +89,24 @@ addToCart.addEventListener("click", () => {
     chosenProduct.quantity === undefined ||
     chosenProduct.colors === undefined
   ) {
-    alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !")
+    alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !");
+    return;
   }
 
   // Si il y a déjà des produits dans le LS
 
-  else if (produitEnregistré) {
-    produitEnregistré.push(chosenProduct);
-    localStorage.setItem("produit", JSON.stringify(produitEnregistré))
+  if (produitEnregistré) {
+    pushLocalStorage()
   }
 
   // Si il n'y a pas de produit dans le LS
   else {
     produitEnregistré = [];
-    produitEnregistré.push(chosenProduct);
-    localStorage.setItem("produit", JSON.stringify(produitEnregistré))
+    pushLocalStorage()
   }
 })
 
-/*// variable dans laquelle on insère les clés/valeurs présentes dans le localstorage
-let produitEnregistré = JSON.parse(localStorage.getItem("produit"));
-// Si il y a déjà des produits dans le LS
-if (produitEnregistré) {
+function pushLocalStorage() {
   produitEnregistré.push(chosenProduct);
   localStorage.setItem("produit", JSON.stringify(produitEnregistré))
 }
-// Si il n'y a pas de produit dans le LS
-else {
-  produitEnregistré = [];
-  produitEnregistré.push(chosenProduct);
-  localStorage.setItem("produit", JSON.stringify(produitEnregistré))
-}*/
-
-
-
-
-
-
-
-
-
-// QUESTION LIGNE 50/92
