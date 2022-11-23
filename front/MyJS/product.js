@@ -98,7 +98,7 @@ addToCart.addEventListener("click", () => {
 
   // Si il y a déjà des produits dans le LS
 
-  else if (produitEnregistré) {
+  if (produitEnregistré) {
     produitEnregistré.push(chosenProduct);
     localStorage.setItem("produit", JSON.stringify(produitEnregistré))
   }
