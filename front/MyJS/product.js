@@ -37,8 +37,8 @@ fetch('http://localhost:3000/api/products/' + idProduct)
 * l'id du produit que nous connaissons déjà, et ensuite ajouter des EventListener sur la quantité et la couleur
 * pour connaitre la sélection de l'utilisateur */
 
-let chosenProduct = {};
-chosenProduct._id = idProduct;
+let clientCart = {};
+clientCart._id = idProduct;
 
 
 // Couleur
@@ -46,9 +46,9 @@ chosenProduct._id = idProduct;
 let productColor = document.getElementById('colors');
 productColor.addEventListener("change", (test) => {
   let exempleColor = test.target.value;
-  chosenProduct.colors = exempleColor;
-  chosenProduct.price = document.getElementById('price').textContent;
-  chosenProduct.name = document.getElementById('title').textContent;
+  clientCart.colors = exempleColor;
+  clientCart.price = document.getElementById('price').textContent;
+  clientCart.name = document.getElementById('title').textContent;
 });
 
 // Quantité
@@ -56,14 +56,14 @@ productColor.addEventListener("change", (test) => {
 let productQuantity = document.getElementById('quantity');
 productQuantity.addEventListener("input", (essai) => {
   let exempleQuantity = essai.target.value;
-  chosenProduct.quantity = exempleQuantity;
-  console.log(chosenProduct);
+  clientCart.quantity = exempleQuantity;
+
 });
 
 const selectQuantity = document.getElementById('quantity');
 const selectColors = document.getElementById('colors');
 
-/* chosenProduct est désormais un array contenant l'id du produit, et la couleur/quantité sélectionné
+/* clientCart est désormais un array contenant l'id du produit, et la couleur/quantité sélectionné
 par l'utilisateur */
 
 /*********************************************************************************************************/
@@ -79,44 +79,41 @@ const addToCart = document.getElementById('addToCart');
 
 addToCart.addEventListener("click", () => {
 
-  // 
-  let produitEnregistré = JSON.parse(localStorage.getItem("produit"));
-
-  /* Une condition pour vérifier que la couleur/quantité est une donnée valide, si oui, la fonction
+  /* On initialise une variable, chosenProduct, qui récupère dans le LS 
+  *  tous les produits ajoutés par le client */
+  let chosenProduct = JSON.parse(localStorage.getItem("produit"));
+  console.log(chosenProduct);
+  /* Une condition pour vérifier que la couleur/quantité de l'objet que tente d'ajouter l'utilisateur
+  * en appuyant sur le bouton addToCart est une donnée valide, si oui,
   * la fonction continue, si non, elle affiche un message d'erreur et s'arrête avec return
   */
   if (
-    chosenProduct.quantity < 1 ||
-    chosenProduct.quantity > 100 ||
-    chosenProduct.quantity === undefined ||
-    chosenProduct.colors === undefined ||
-    chosenProduct.colors === ""
+    clientCart.quantity < 1 ||
+    clientCart.quantity > 100 ||
+    clientCart.quantity === undefined ||
+    clientCart.colors === undefined ||
+    clientCart.colors === ""
   ) {
     alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !");
     return;
   }
 
-  // Fonction d'ajout d'un produit dans le LocalStorage
+  // Fonction d'ajout dans le tableau clientCart de l'objet choisi par l'utilisateur
   
   function pushLocalStorage() {
-    produitEnregistré.push(chosenProduct);
-    localStorage.setItem("produit", JSON.stringify(produitEnregistré))
+    chosenProduct.push(clientCart);
+    localStorage.setItem("produit", JSON.stringify(chosenProduct))
   }
 
-  // Si il y a déjà des produits dans le LS
+  // A ce stade, chosenProduct renvoie null
 
-  if (produitEnregistré) {
+  if (chosenProduct) {
     pushLocalStorage()
   }
 
   // Si il n'y a pas de produit dans le LS
   else {
-    produitEnregistré = [];
+    chosenProduct = [];
     pushLocalStorage()
   }
 })
-
-function pushLocalStorage() {
-  produitEnregistré.push(chosenProduct);
-  localStorage.setItem("produit", JSON.stringify(produitEnregistré))
-}
