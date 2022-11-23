@@ -87,7 +87,8 @@ addToCart.addEventListener("click", () => {
     chosenProduct.quantity < 1 ||
     chosenProduct.quantity > 100 ||
     chosenProduct.quantity === undefined ||
-    chosenProduct.colors === undefined
+    chosenProduct.colors === undefined ||
+    chosenProduct.colors === ""
   ) {
     alert("Quelque chose s'est mal passé ! Veuillez indiquer la couleur et la quantité désiré !");
     return;
