@@ -82,7 +82,7 @@ addToCart.addEventListener("click", () => {
   /* On initialise une variable, chosenProduct, qui récupère dans le LS 
   *  tous les produits ajoutés par le client */
   let chosenProduct = JSON.parse(localStorage.getItem("produit"));
-  console.log(chosenProduct);
+
   /* Une condition pour vérifier que la couleur/quantité de l'objet que tente d'ajouter l'utilisateur
   * en appuyant sur le bouton addToCart est une donnée valide, si oui,
   * la fonction continue, si non, elle affiche un message d'erreur et s'arrête avec return
@@ -105,15 +105,20 @@ addToCart.addEventListener("click", () => {
     localStorage.setItem("produit", JSON.stringify(chosenProduct))
   }
 
-  // A ce stade, chosenProduct renvoie null
+  /* Si le panier est vide, chosenProduct renvoie null, donc pour "if (chosenProduct)"
+  * chosenProduct renvoie false à la condition du if ligne 113. Cela continue donc à la 
+  * condition else ligne 118, qui va insérer un tableau à chosenProduct puis appliquer la
+  * fonction pushLocalStorage() */
 
   if (chosenProduct) {
     pushLocalStorage()
+    alert("Produit ajouté au panier!");
   }
 
   // Si il n'y a pas de produit dans le LS
   else {
     chosenProduct = [];
-    pushLocalStorage()
+    pushLocalStorage();
+    alert("Félicitation, vous avez ajouter votre premier article à votre panier!");
   }
 })
