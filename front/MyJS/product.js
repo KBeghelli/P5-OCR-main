@@ -1,5 +1,6 @@
-
+// Utilisation de searchParams pour récupérer l'ID produit de la page
 let params = (new URL(document.location)).searchParams;
+// Création de variable utilisé pour fetch le bon produit, et pour ensuite l'envoyer dans le panier
 let idProduct = params.get("id");
 
 const title = document.getElementById('title');
@@ -8,6 +9,22 @@ const description = document.getElementById('description');
 const colors = document.getElementById('colors');
 const image = document.querySelector("article div.item__img");
 
+/* Création de imageURL et imageAltTxt vide, qui seront remplis pendant le fetch de l'api
+Utile au moment de l'envoie des objets dans le LocalStorage : Pouvoir envoyer l'objet avec son id, price,
+imageURL etc, bref toutes ses clés/valeurs, c'est préférable/plus simple d'envoyer toutes ses données 
+en même temps plutôt que de devoir chercher sur la page cart.js la bonne id du produit correspondant, puis 
+à ce moment là d'itérer sur les différents produits pour rajouter à chaque objet les différentes clés
+correspondantes etc */
+
+const imageURL = "";
+const imageAltTxt = "";
+
+/* Je Fetch l'api en indiquant l'id du produit à fetch,
+j'insère ensuite dans les variables créer juste au dessus (variables reliant vers les bonnes id dans le html)
+les données récupérer de l'api.
+Pour les couleurs, comme c'est un menu déroulant avec un nombre d'éléments variables, j'utilise
+une boucle pour insérer chaque couleur récupérer dans l'api
+*/
 
 fetch('http://localhost:3000/api/products/' + idProduct)
   .then(res => res.json())
@@ -25,7 +42,7 @@ fetch('http://localhost:3000/api/products/' + idProduct)
 
   })
   .catch(_error => {
-    alert('BUG');
+    alert('Error');
   });
 
 /**********************************************************************************************************/
@@ -49,6 +66,9 @@ productColor.addEventListener("change", (test) => {
   clientCart.colors = exempleColor;
   clientCart.price = document.getElementById('price').textContent;
   clientCart.name = document.getElementById('title').textContent;
+  clientCart.alt = document.getElementById('description').textContent;
+  clientCart.image = document.querySelector("article div.item__img").textContent;
+  console.log(clientCart)
 });
 
 // Quantité
@@ -99,18 +119,38 @@ addToCart.addEventListener("click", () => {
   }
 
   // Fonction d'ajout dans le tableau clientCart de l'objet choisi par l'utilisateur
-  
+
   function pushLocalStorage() {
     chosenProduct.push(clientCart);
     localStorage.setItem("produit", JSON.stringify(chosenProduct))
   }
 
   /* Si le panier est vide, chosenProduct renvoie null, donc pour "if (chosenProduct)"
-  * chosenProduct renvoie false à la condition du if ligne 113. Cela continue donc à la 
-  * condition else ligne 118, qui va insérer un tableau à chosenProduct puis appliquer la
+  * chosenProduct renvoie false à la condition du if ligne 132. Cela continue donc à la 
+  * condition else ligne 146, qui va insérer un tableau à chosenProduct puis appliquer la
   * fonction pushLocalStorage() */
 
+  //-------------------------------------ACTUALISATION DE LA QUANTITE--------------------------------------//
+
+  /* Explication : Si chosenProduct (donc ce qui est récupérer dans le localStorage) contient quelque chose, 
+  alors on utilise une boucle for of pour itérer sur ces paires clés/valeurs.
+  On souhaite cette itération uniquement si l'id et la color de cet objet thatProduct sont déjà présents 
+  dans le panier clientCart du client.
+  Si les conditions sont remplis, on créer une nouvelle variable, qui sera le résultat de l'addition 
+  entre les deux commandes
+  On convertis le résultat de cette opération dans une chaine JSON, qui viendra donc remplacer la valeur
+  présente avant la boucle
+  et on retourne enfin dans le LS ce produit avec les quantitées modifiées
+  */
   if (chosenProduct) {
+    for (let thatProduct of chosenProduct) {
+      if (thatProduct._id === clientCart._id && thatProduct.colors === clientCart.colors) {
+        let addition = +thatProduct.quantity + +clientCart.quantity;
+        thatProduct.quantity = JSON.stringify(addition);
+        alert("Quantité de votre produit mise à jour !");
+        return(localStorage.produit = JSON.stringify(chosenProduct));
+      }
+    }
     pushLocalStorage()
     alert("Produit ajouté au panier!");
   }
