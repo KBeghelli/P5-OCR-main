@@ -9,15 +9,15 @@ const description = document.getElementById('description');
 const colors = document.getElementById('colors');
 const image = document.querySelector("article div.item__img");
 
-/* Création de imageURL et imageAltTxt vide, qui seront remplis pendant le fetch de l'api
+/* Création de imagePath et imageAltTxt vide, qui seront remplis pendant le fetch de l'api
 Utile au moment de l'envoie des objets dans le LocalStorage : Pouvoir envoyer l'objet avec son id, price,
-imageURL etc, bref toutes ses clés/valeurs, c'est préférable/plus simple d'envoyer toutes ses données 
+imagePath etc, bref toutes ses clés/valeurs, c'est préférable/plus simple d'envoyer toutes ses données 
 en même temps plutôt que de devoir chercher sur la page cart.js la bonne id du produit correspondant, puis 
 à ce moment là d'itérer sur les différents produits pour rajouter à chaque objet les différentes clés
 correspondantes etc */
 
-const imageURL = "";
-const imageAltTxt = "";
+let imagePath = "";
+let imageAltTxt = "";
 
 /* Je Fetch l'api en indiquant l'id du produit à fetch,
 j'insère ensuite dans les variables créer juste au dessus (variables reliant vers les bonnes id dans le html)
@@ -33,6 +33,8 @@ fetch('http://localhost:3000/api/products/' + idProduct)
     title.innerText = `${data.name}`;
     price.innerText = `${data.price}`;
     description.innerText = `${data.description}`;
+    imagePath = data.imageUrl ;
+    imageAltTxt = data.altTxt ;
 
     for (let color of data.colors) {
       colors.innerHTML += `<option value=
@@ -67,7 +69,9 @@ productColor.addEventListener("change", (test) => {
   clientCart.price = document.getElementById('price').textContent;
   clientCart.name = document.getElementById('title').textContent;
   clientCart.alt = document.getElementById('description').textContent;
-  clientCart.image = document.querySelector("article div.item__img").textContent;
+  //clientCart.image = document.querySelector("article div.item__img").textContent;
+  clientCart.path = imagePath;
+  clientCart.altTxt = imageAltTxt;
   console.log(clientCart)
 });
 
