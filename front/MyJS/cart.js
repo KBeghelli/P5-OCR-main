@@ -123,8 +123,18 @@ calculingNumberOfProduct()
 
 
 /* Fonction suppression d'un canapé dans le panier
-Je cible tous les éléments possédant l'attribut "deleteItem" avec une boucle, et ajoute un eventlistener
-sur le click. 
+
+Je cible tous les éléments possédant l'attribut "deleteItem", et boucle sur l'élément cliqué par l'utilisateur.
+Je créer des variables et récupère dans celle-ci l'id et la color de ce produit en particulier.
+J'utilise ensuite la fonction filter() pour me renvoyer le tableau productInLocalStorage sans
+l'élément possédant l'id et la color indiqué
+Je réegengistre dans le local storage le panier de l'utilisateur sans l'élément
+
+Je supprime dynamiquement le HTML en ciblant d'abord avec closest() la balise "article" la plus proche 
+de l'élément ciblé, puis j'utilise remove() pour supprimer tout ce qui se trouve dans cette partie du HTML
+
+Je réutilise ensuite mes fonctions calculingCart() et calculingNumberOfProduct() pour recalculer le
+nombre de produit et le prix total du panier
 */
 
 function deleteProduct() {
@@ -137,10 +147,12 @@ function deleteProduct() {
             let colorDelete = productInLocalStorage[j].colors;
 
             productInLocalStorage = productInLocalStorage.filter(el =>
-                el._id !== idDelete || el.colors !== colorDelete);
+                el._id !== idDelete || el.colors !== colorDelete
+            );
 
             localStorage.setItem("produit", JSON.stringify(productInLocalStorage));
             deleteThatProduct[j].closest("article").remove();
+
             calculingCart()
             calculingNumberOfProduct()
         }
@@ -151,66 +163,135 @@ deleteProduct();
 
 /* FORMULAIRE */
 
-const contact = {
-    firstName: document.getElementById('firstName').value,
-    lastName: document.getElementById('lastName').value,
-    address: document.getElementById('address').value,
-    city: document.getElementById('city').value,
-    email: document.getElementById('email').value
+let orderId = "";
+/* Création de 3 fonctions "RegExp", pour vérifier si les données indiquer par l'utilisateur sont valides. */
+
+function checkingLetter(value) {
+    return /^[A-Z-a-z\s]{3,25}$/.test(value)
 }
 
-function firstNameValide() {
-    const regExpOnlyLetter = /^[A-Za-z]+$/;
-    let firstName = document.getElementById('firstName').value;
-    if (!regExpOnlyLetter.test(firstName)) {
-        alert('Prénom non valide !');
-        return false
+function checkingAdress(value) {
+    return /^[0-9]{1,5}[a-z-A-Z\s]{2,8}[a-z-A-Z -.,]{3,40}$/.test(value)
+}
+
+function chekingEmail(value) {
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)
+}
+
+/* Créations de 5 variables contenant le chemin vers les différentes informations personnelles de 
+l'utilisateur, nécessaire pour le contacter / passer une commande.
+J'utilise ensuite des Event Listener de type change sur chacun des formulaires. Je vérifie les données
+remplis par l'utilisateur au "RegExp" créer juste avant, si les données sont invalides (un chiffre dans
+le prénom par exemple), j'affiche un message d'erreur.
+*/
+const formFirstName = document.getElementById("firstName");
+const formLastName = document.getElementById("lastName");
+const formAdress = document.getElementById("address");
+const formCity = document.getElementById("city");
+const formEmail = document.getElementById("email");
+
+formFirstName.addEventListener("change", (e) => {
+    if (checkingLetter(formFirstName.value)) {
+        firstNameErrorMsg.textContent = "";
     } else {
-        return true;
+        firstNameErrorMsg.textContent = `Doit Contenir entre 3 et 25 caractères`;
+        e.preventDefault()
     }
-}
+});
 
-function lastNameValide() {
-    const regExpOnlyLetter = /^[A-Za-z]+$/;
-    let lastName = document.getElementById('lastName').value;
-    if (!regExpOnlyLetter.test(lastName)) {
-        alert('Nom non valide !');
-        return false
+formLastName.addEventListener("change", (e) => {
+    if (checkingLetter(formLastName.value)) {
+        lastNameErrorMsg.textContent = "";
     } else {
-        return true;
+        lastNameErrorMsg.textContent = `Doit Contenir entre 3 et 25 caractères`;
+        e.preventDefault()
     }
-}
+});
 
-function adressValide() {
-    const regExAdress = /^[0-9a-zA-Z]+$/;
-    let address = document.getElementById('address').value;
-    if (!regExAdress.test(address)) {
-        alert('Adresse non valide !');
-        return false
+formAdress.addEventListener("change", (e) => {
+    if (checkingAdress(formAdress.value)) {
+        addressErrorMsg.textContent = "";
     } else {
-        return true;
+        addressErrorMsg.textContent = `Doit Contenir entre 3 et 25 caractères`;
+        e.preventDefault()
     }
-}
+});
 
-function cityValide() {
-    const regExpOnlyLetter = /^[A-Za-z]+$/;
-    let city = document.getElementById('city').value;
-    if (!regExpOnlyLetter.test(city)) {
-        alert('Ville non valide !');
-        return false
+formCity.addEventListener("change", (e) => {
+    if (checkingLetter(formCity.value)) {
+        cityErrorMsg.textContent = "";
     } else {
-        return true;
+        cityErrorMsg.textContent = `Doit Contenir entre 3 et 25 caractères`;
+        e.preventDefault()
     }
-}
+});
 
-function emailValide() {
-    const regExMail = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
-    let email = document.getElementById('email').value;
-    if (!regExMail.test(email)) {
-        alert('Email non valide !');
-        return false
+formEmail.addEventListener("change", (e) => {
+    if (chekingEmail(formEmail.value)) {
+        emailErrorMsg.textContent = "";
     } else {
-        return true;
+        emailErrorMsg.textContent = `Doit Contenir entre 3 et 25 caractères`;
+        e.preventDefault()
     }
-}
+});
 
+/* Je créer une variable ciblant le bouton commander, et je EventListener le click. 
+Si les RegEx renvoie true sur la valeur des différents formulaires, alors on continu
+On récupère les produits ajouté au panier présent dans le localstorage
+
+*/
+const sendingOrder = document.getElementById("order")
+
+sendingOrder.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const contact = {
+        firstName: formFirstName.value,
+        lastName: formLastName.value,
+        address: formAdress.value,
+        city: formCity.value,
+        email: formEmail.value
+    }
+
+    if (checkingLetter(formFirstName.value) &&
+        checkingLetter(formLastName.value) &&
+        checkingAdress(formAdress.value) &&
+        checkingLetter(formCity.value) &&
+        chekingEmail(formEmail.value)) {
+
+        localStorage.setItem("contact", JSON.stringify(contact));
+    } else {
+        alert("Le formulaire n'est pas bien remplis !")
+    }
+
+
+    let products = [];
+    for (let i = 0; i < productInLocalStorage.length; i++) {
+        products.push(productInLocalStorage[i]._id);
+    }
+    
+    console.log("products")
+    console.log(products)
+    console.log("contact")
+    console.log(contact)
+
+    const finalCommand = {
+        contact,
+        products,
+    }
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(finalCommand),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+
+    fetch("http://localhost:3000/api/products/order", options)
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('orderId', data.orderId);
+            document.location.href = 'confirmation.html?id='+ data.orderId;
+        });
+})
